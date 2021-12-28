@@ -10,17 +10,60 @@
                 height: 1rem;
                 border: none;
             }
+            /* The alert message box */
+            .alert {
+            padding: 20px;
+            background-color: #f44336; /* Red */
+            color: white;
+            margin-bottom: 15px;
+            }
+
+            /* The close button */
+            .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            }
+
+            /* When moving the mouse over the close button */
+            .closebtn:hover {
+            color: black;
+            }
         </style>
     </head>
     <body>
         <div class="container-fluid" style="margin: 50px">
-            <div class="row" style="height: 500px;"> 
-                <div class="col">
-                    <div id="tester" style="width:100%;height:100%;"></div>
+            <div class="row"> 
+                <div class="col-8">
+                    <div class="row">
+                        <div id="concentration" style="height:400px;"></div>
+                    </div>
+                    <div class="row">
+                        <div id="content" style="height:400px;"></div>
+                    </div>
+                    <div class="row">
+                        <div id="volume" style="height:400px;"></div>
+                    </div>
+                    <div class="row">
+                        <div id="U" style="height:400px;"></div>
+                    </div>
+                    <div class="row">
+                        <div id="osor" style="height:400px;"></div>
+                    </div>
                 </div>
-                <div class="col">
+                <div class="col-4">
                     <form>
                         <div class="row">
+                            
+                            <div class="alert" style="display: none;" id="warning_div">
+                                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                Введите корректные данные.
+                            </div>
                             <div class="col-1">
                                 <label for="input_na">[Na]<sub>i</sub></label><br>
                                 <label for="input_k">[K]<sub>i</sub></label><br>
@@ -38,6 +81,7 @@
                                 <label for="input_ikc">I<sub>KC</sub></label><br>
                                 <label for="input_inkcc">I<sub>NKCC</sub></label><br>
                                 <label for="input_kv">kv</label><br>
+                                <label for="input_tmax">t<sub>max</sub></label><br>
                             </div>
                             <div class="col">
                                 <input class="number_input" id="input_na" value="25.7" type="text" pattern="[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"><br>
@@ -56,11 +100,13 @@
                                 <input class="number_input" id="input_ikc" value="0" type="text" pattern="[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"><br>
                                 <input class="number_input" id="input_inkcc" value="0" type="text" pattern="[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"><br>
                                 <input class="number_input" id="input_kv" value="1" type="text" pattern="[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"><br>
+                                <input class="number_input" id="input_tmax" value="300" type="text" pattern="[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"><br>
                             </div>
                         </div>
                         <br>
-                        <input type="submit" value="Рассчитать" id="form_submit" onsubmit="">
-                    </form>
+                        <input type="submit" value="Рассчитать" id="form_submit">
+                    </form><br>
+                    <input type="button" value="Скачать результаты" id="download_result">
                 </div>
             </div>
         </div>
