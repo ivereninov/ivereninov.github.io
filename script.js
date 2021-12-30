@@ -140,20 +140,20 @@ function main() {
     // READING DATA
     var na0 = 140.0;
     var k0 = 5.0;
-    var cl0 = 155.0;
-    var B0 = 0.0;
+    var cl0 = 116.0;
+    var B0 = 48.2;
     var kv = 1.000;
-    var na1 = 25.7;
-    var k1 = 157.3;
-    var cl1 = 14.9;
+    var na1 = 38.0;
+    var k1 = 147.0;
+    var cl1 = 45.0;
     var beta = 0.050;
     var gamma = 1.50;
-    var pna = 0.05;
-    var pk = 3.33;
-    var pcl = 0.035;
-    var inc = 0.001;
-    var ikc = 0;
-    var inkcc = 0;
+    var pna = 0.0017;
+    var pk = 0.0115;
+    var pcl = 0.011;
+    var inc = 0.00007;
+    var ikc = 0.00008;
+    var inkcc = 0.000000008;
     var hp = 1;
     var kb = 0;
 
