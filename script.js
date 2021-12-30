@@ -139,7 +139,7 @@ function main() {
 
     // READING DATA
     var na0 = 140.0;
-    var k0 = 5.0;
+    var k0 = 5.8;
     var cl0 = 116.0;
     var B0 = 48.2;
     var kv = 1.000;
