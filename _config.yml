@@ -1,4 +1,7 @@
 theme: minima
-header_pages:
-  - how to.md
-  - publications.md
+title: Computation of Pump-Leak Flux Balance in Animal Cells
+author:
+  name: A.A.Vereninov
+description: > # this means to ignore newlines until "show_excerpts:"
+  Many vital processes in animal cells depend on monovalent ion transport across the plasma membrane via specific pathways.
+  Their operation is described by a set of nonlinear and transcendental equations that cannot be solved analytically.
