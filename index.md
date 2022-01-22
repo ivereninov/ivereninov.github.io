@@ -3,6 +3,8 @@ This is page about cell-flux modelling software.
 
 ## How to use
 
+For computation go here -> [CELL-FLUX COMPUTATION](https://vereninov.com/cellflux)
+
 ## Example data
 Here goes some example data
 
