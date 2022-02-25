@@ -1,209 +1,188 @@
 window.addEventListener('load', main, false);
 function main() {
 
-  const isNumber = value => typeof value === 'number' && value === value && value !== Infinity && value !== -Infinity;
+    const isNumber = value => typeof value === 'number' && value === value && value !== Infinity && value !== -Infinity;
 
+    // all variables
+    var na, k, cl, na0, k0, cl0, t_max, hp, lt, indic, mt, mu, mk, mna, mcl, ml, mva, mz, 
+        naC, kC, clC, mosor, mun, muk, mucl, na2, k2, cl2, V2, beta2, tind, naind, mast, 
+        B0, osor, kv, na1, k1, cl1, beta, gamma, pna, pk, pcl, inc, ikc, inkcc, kb, BB, A1,
+        t, lt, unach, ukon, g, u, prna, prcl, prk, flux, error;
 
-    var art = [[0, -82.6,  25.7,  157.3,  14.9,  9.80, -127.9,    9.5,   20.1,     251.6,    1541.4,     146.2],
-    [24, -20.5, 146.7,   12.9, 110.7, 33.68,  -19.2,    4.7,   11.5,    4942.7,     433.2,    3729.2],
-    [48, -18.9, 144.3,   12.2, 123.2, 49.37,  -18.1,    4.9,   12.8,    7126.8,     602.6,    6082.6],
-    [72, -18.3, 143.4,   12.0, 128.0, 60.15,  -17.7,    5.0,   13.2,    8625.9,     719.8,    7698.8],
-    [96, -18.0, 142.9,   11.8, 130.4 ,67.65,  -17.5,    5.0,   13.4,    9669.0,     801.5,    8823.7],
-   [120, -17.9, 142.7,   11.8, 131.8, 72.90,  -17.4,    5.0,   13.5,   10399.0,     858.8,    9611.0],
-   [144, -17.8, 142.5,   11.7, 132.7, 76.58,  -17.3,    5.0,   13.6,   10911.3,     899.0,   10163.4],
-   [168, -17.7, 142.4,   11.7, 133.3, 79.17,  -17.2,    5.0,   13.7,   11271.3,     927.2,   10551.7],
-   [192, -17.6, 142.3,   11.7, 133.7, 80.99,  -17.2,    5.0,   13.7,   11524.6,     947.1,   10824.9],
-   [216, -17.6, 142.2,   11.7, 133.9, 82.27,  -17.2,    5.1,   13.7,   11702.9,     961.1,   11017.2],
-   [240, -17.6, 142.2,   11.7, 134.1, 83.17,  -17.2,    5.1,   13.7,   11828.4,     971.0,   11152.6]];
-    var t_true = [0, 24, 48, 72, 96, 120, 144, 168, 192, 216, 240];
-    var na_true = [25.7, 146.7, 144.3, 143.4, 142.9, 142.7, 142.5, 142.4, 142.3, 142.2, 142.2,];
-    var k_true = [157.3, 12.9, 12.2, 12.0, 11.8, 11.8, 11.7, 11.7, 11.7, 11.7, 11.7,];
-    var cl_true = [14.9, 110.7, 123.2, 128.0, 130.4, 131.8, 132.7, 133.3, 133.7, 133.9, 134.1,];
+    // initialization
+    function init() {
+        // read data from form
+        na1 = parseFloat(input_na.value);
+        k1 = parseFloat(input_k.value);
+        cl1 = parseFloat(input_cl.value);
+        na0 = parseFloat(input_na0.value);
+        k0 = parseFloat(input_k0.value);
+        cl0 = parseFloat(input_cl0.value);
+        B0 = parseFloat(input_b0.value);
+        beta = parseFloat(input_beta.value);
+        gamma = parseFloat(input_gamma.value);
+        pna = parseFloat(input_pna.value);
+        pk = parseFloat(input_pk.value);
+        pcl = parseFloat(input_pcl.value);
+        inc = parseFloat(input_inc.value);
+        ikc = parseFloat(input_ikc.value);
+        inkcc = parseFloat(input_inkcc.value);
+        kv = parseFloat(input_kv.value);
+        hp = parseFloat(input_hp.value);
+        t_max = parseFloat(input_tmax.value); 
 
-    var t_max = 300;
-    var hp = 1;
-    var lt;
-    var indic;
-    var mt = [];
-    var mu = [];
-    var mk = [];
-    var mna = [];
-    var mcl = [];
-    var ml = [];
-    var mva = [];
-    var mz = [];
-    var naC = [];
-    var kC = [];
-    var clC = [];
-    var mosor = [];
-    var mun = [];
-    var muk = [];
-    var mucl = [];
-    var flux = {
-      'Net' : {
-        'Pump': {
-          'Na': [],
-          'K' : [],
-          'Cl': [],
-        },
-        'Channel': {
-          'Na': [],
-          'K' : [],
-          'Cl': [],
-        },
-        'NC' : {
-          'Na': [],
-          'K' : [],
-          'Cl': [],
-        },
-        'KC' : {
-          'Na': [],
-          'K' : [],
-          'Cl': [],
-        },
-        'NKCC' : {
-          'Na': [],
-          'K' : [],
-          'Cl': [],
-        },
-      }, 
-      'In' : {
-        'Pump': {
-          'Na': [],
-          'K' : [],
-          'Cl': [],
-        },
-        'Channel': {
-          'Na': [],
-          'K' : [],
-          'Cl': [],
-        },
-        'NC' : {
-          'Na': [],
-          'K' : [],
-          'Cl': [],
-        },
-        'KC' : {
-          'Na': [],
-          'K' : [],
-          'Cl': [],
-        },
-        'NKCC' : {
-          'Na': [],
-          'K' : [],
-          'Cl': [],
-        },
-      },
-      'Ef' : {
-        'Pump': {
-          'Na': [],
-          'K' : [],
-          'Cl': [],
-        },
-        'Channel': {
-          'Na': [],
-          'K' : [],
-          'Cl': [],
-        },
-        'NC' : {
-          'Na': [],
-          'K' : [],
-          'Cl': [],
-        },
-        'KC' : {
-          'Na': [],
-          'K' : [],
-          'Cl': [],
-        },
-        'NKCC' : {
-          'Na': [],
-          'K' : [],
-          'Cl': [],
-        },
-      }
-    };
-    var na2;
-    var k2;
-    var cl2;
-    var V2;
-    var beta2;
-    var l2;
-    var kp;
-    var tind;
-    var naind;
-    var mast;
-    var B0;
-    var osor;
-    var pp;
-    var hi;
+        // check readed data
+        if (!(isNumber(na0) && isNumber(k0) && isNumber(cl0) && isNumber(B0) && isNumber(kv) && isNumber(na1) && isNumber(k1) && isNumber(cl1) && isNumber(beta) && isNumber(gamma) && isNumber(pna) && isNumber(pk) && isNumber(pcl) && isNumber(inc) && isNumber(ikc) && isNumber(inkcc) && isNumber(t_max))) {
+            warning_div.style.display = 'inline-block';
+            throw 'BAD DATA'
+        }
 
-    // READING DATA
-    var na0 = 140.0;
-    var k0 = 5.8;
-    var cl0 = 116.0;
-    var B0 = 48.2;
-    var kv = 1.000;
-    var na1 = 38.0;
-    var k1 = 147.0;
-    var cl1 = 45.0;
-    var beta = 0.050;
-    var gamma = 1.50;
-    var pna = 0.0017;
-    var pk = 0.0115;
-    var pcl = 0.011;
-    var inc = 0.00007;
-    var ikc = 0.00008;
-    var inkcc = 0.000000008;
-    var hp = 1;
-    var kb = 0;
+        // zeroing arrays
+        mt = [];
+        mu = [];
+        mk = [];
+        mna = [];
+        mcl = [];
+        ml = [];
+        mva = [];
+        mz = [];
+        naC = [];
+        kC = [];
+        clC = [];
+        mosor = [];
+        mun = [];
+        muk = [];
+        mucl = [];
+        flux = {
+            'Net' : {
+              'Pump': {
+                'Na': [],
+                'K' : [],
+                'Cl': [],
+              },
+              'Channel': {
+                'Na': [],
+                'K' : [],
+                'Cl': [],
+              },
+              'NC' : {
+                'Na': [],
+                'K' : [],
+                'Cl': [],
+              },
+              'KC' : {
+                'Na': [],
+                'K' : [],
+                'Cl': [],
+              },
+              'NKCC' : {
+                'Na': [],
+                'K' : [],
+                'Cl': [],
+              },
+            }, 
+            'In' : {
+              'Pump': {
+                'Na': [],
+                'K' : [],
+                'Cl': [],
+              },
+              'Channel': {
+                'Na': [],
+                'K' : [],
+                'Cl': [],
+              },
+              'NC' : {
+                'Na': [],
+                'K' : [],
+                'Cl': [],
+              },
+              'KC' : {
+                'Na': [],
+                'K' : [],
+                'Cl': [],
+              },
+              'NKCC' : {
+                'Na': [],
+                'K' : [],
+                'Cl': [],
+              },
+            },
+            'Ef' : {
+              'Pump': {
+                'Na': [],
+                'K' : [],
+                'Cl': [],
+              },
+              'Channel': {
+                'Na': [],
+                'K' : [],
+                'Cl': [],
+              },
+              'NC' : {
+                'Na': [],
+                'K' : [],
+                'Cl': [],
+              },
+              'KC' : {
+                'Na': [],
+                'K' : [],
+                'Cl': [],
+              },
+              'NKCC' : {
+                'Na': [],
+                'K' : [],
+                'Cl': [],
+              },
+            }
+          };
 
-    // 
-    var na = na1;
-    var k = k1;
-    var cl = cl1;
-    var BB = B0;
-    var A1 = 1;
-    na = na*kv;
-    k = k*kv;
-    cl = cl*kv;
-    mast = (k0+na0+cl0+BB-k-na-cl);
-    var V = A1/mast;
-    z = V*(cl-na-k)/A1;
-    na2 = na;
-    k2 = k;
-    cl2 = cl;
-    beta2 = beta;
-    V2 = V;
-    var prna;
-    var prk;
-    var prcl;
-    var h = 0.1;
-    var t = 0;
-    var g;
-    var u;
-    lt =  1;
+        // assertion
+        kb = 0;
+        na = na1;
+        k = k1;
+        BB = B0;
+        A1 = 1;
+        na = na*kv;
+        k = k*kv;
+        cl = cl1*kv;
+        mast = (k0+na0+cl0+BB-k-na-cl);
+        V = A1/mast;
+        z = V*(cl-na-k)/A1;
+        na2 = na;
+        k2 = k;
+        cl2 = cl;
+        beta2 = beta;
+        V2 = V;
+        h = 0.1;
+        t = 0;
+        lt = 1;
+        unach = -5.5;
+
+        naC = [];
+        kC = [];
+        clC = [];
+
+        if ((na2<=0) || (k2<=0) || (cl2<=0) || (V2<=0) || (V<=0) || (z>=0)) {
+            throw 'BAD INITIAL DATA';
+        }
     
-    var unach = -5.5;
-    var ukon = 0.2;
-
-    if ((na2<=0) || (k2<=0) || (cl2<=0) || (V2<=0) || (V<=0) || (z>=0)) {
-        throw 'BAD INITIAL DATA';
     }
 
     function F(u, na, k, cl, na0, k0, cl0, pna, pk, pcl, beta, gamma) {
         return Math.exp(u) - (pna*na0 + pk*k0 + pcl*cl + beta*na*(1-1/gamma)/u)/(pna*na + pk*k + pcl*cl0 + beta*na*(1-1/gamma)/u);
     }
 
-    function solveU(na, k, cl, na0, k0, cl0, pna, pk, pcl, beta, gamma) {
-        var eps = 0.0001;
+    function solveU(na, k, cl, na0, k0, cl0, pna, pk, pcl, beta, gamma, unach, ukon, eps=1e-6) {
         var a = unach;
-        var b = -eps;
+        var b = ukon;
         while (F(a, na, k, cl, na0, k0, cl0, pna, pk, pcl, beta, gamma)*F(b, na, k, cl, na0, k0, cl0, pna, pk, pcl, beta, gamma) > 0) {
             b-=eps;
             if (a>b) {
                 throw 'Can\'t solve F(u)=0';
             }
         }
+        var c = (b+a)/2;
         while ((b-a)/2 > eps) {
             c = (b+a)/2;
             if (F(c, na, k, cl, na0, k0, cl0, pna, pk, pcl, beta, gamma)*F(b, na, k, cl, na0, k0, cl0, pna, pk, pcl, beta, gamma)<0) {
@@ -212,66 +191,108 @@ function main() {
                 b = c;
             }
         }
+		console.log(F(c, na, k, cl, na0, k0, cl0, pna, pk, pcl, beta, gamma))
         return c;
     }
 
     function calc_fluxes() {
-      var jnc=inc*(na0*cl0-na*cl);
-      var jkc=ikc*(k0*cl0-k*cl);
-      var jnkcc=inkcc*(na0*k0*cl0*cl0-na*k*cl*cl);
-
-      var jnce=inc*(-na*cl);
-      var jkce=ikc*(-k*cl);
-      var jnkcce=inkcc*(-na*k*cl*cl);
-      flux['Net']['Pump']['Na'].push(-beta*na);
-      flux['Net']['Channel']['Na'].push(pna*u*(na*Math.exp(u)-na0)/g);
-      flux['Net']['NC']['Na'].push(jnc);
-      flux['Net']['KC']['Na'].push(0);
-      flux['Net']['NKCC']['Na'].push(jnkcc);
-      flux['Net']['Pump']['K'].push(beta/gamma*na);
-      flux['Net']['Channel']['K'].push(pk*u*(k*Math.exp(u)-k0)/g);
-      flux['Net']['NC']['K'].push(0);
-      flux['Net']['KC']['K'].push(jkc);
-      flux['Net']['NKCC']['K'].push(jnkcc);
-      flux['Net']['Pump']['Cl'].push(0);
-      flux['Net']['Channel']['Cl'].push(pcl*u*(cl-cl0*Math.exp(u))/g);
-      flux['Net']['NC']['Cl'].push(jnc);
-      flux['Net']['KC']['Cl'].push(jkc);
-      flux['Net']['NKCC']['Cl'].push(2*jnkcc);
-      flux['In']['Pump']['Na'].push(0);
-      flux['In']['Channel']['Na'].push(-pna*u*na0/g);
-      flux['In']['NC']['Na'].push(inc*na0*cl0);
-      flux['In']['KC']['Na'].push(0);
-      flux['In']['NKCC']['Na'].push(inkcc*na0*k0*cl0*cl0);
-      flux['In']['Pump']['K'].push(beta/gamma*na);
-      flux['In']['Channel']['K'].push(pk*u*(-k0)/g);
-      flux['In']['NC']['K'].push(0);
-      flux['In']['KC']['K'].push(ikc*k0*cl0);
-      flux['In']['NKCC']['K'].push(inkcc*na0*k0*cl0*cl0);
-      flux['In']['Pump']['Cl'].push(0);
-      flux['In']['Channel']['Cl'].push(pcl*u*(-cl0*Math.exp(u))/g);
-      flux['In']['NC']['Cl'].push(inc*na0*cl0);
-      flux['In']['KC']['Cl'].push(ikc*k0*cl0);
-      flux['In']['NKCC']['Cl'].push(2*inkcc*na0*k0*cl0*cl0);
-      flux['Ef']['Pump']['Na'].push(-beta*na);
-      flux['Ef']['Channel']['Na'].push(pna*u*na*Math.exp(u)/g);
-      flux['Ef']['NC']['Na'].push(jnce);
-      flux['Ef']['KC']['Na'].push(0);
-      flux['Ef']['NKCC']['Na'].push(jnkcce);
-      flux['Ef']['Pump']['K'].push(0);
-      flux['Ef']['Channel']['K'].push(pk*u*k*Math.exp(u)/g);
-      flux['Ef']['NC']['K'].push(0);
-      flux['Ef']['KC']['K'].push(jkce);
-      flux['Ef']['NKCC']['K'].push(jnkcce);
-      flux['Ef']['Pump']['Cl'].push(0);
-      flux['Ef']['Channel']['Cl'].push(pcl*u*cl/g);
-      flux['Ef']['NC']['Cl'].push(jnce);
-      flux['Ef']['KC']['Cl'].push(jkce);
-      flux['Ef']['NKCC']['Cl'].push(2*jnkcce);
+        var jnc=inc*(na0*cl0-na*cl);
+        var jkc=ikc*(k0*cl0-k*cl);
+        var jnkcc=inkcc*(na0*k0*cl0*cl0-na*k*cl*cl);
+  
+        var jnce=inc*(-na*cl);
+        var jkce=ikc*(-k*cl);
+        var jnkcce=inkcc*(-na*k*cl*cl);
+        flux['Net']['Pump']['Na'].push(-beta*na);
+        flux['Net']['Channel']['Na'].push(pna*u*(na*Math.exp(u)-na0)/g);
+        flux['Net']['NC']['Na'].push(jnc);
+        flux['Net']['KC']['Na'].push(0);
+        flux['Net']['NKCC']['Na'].push(jnkcc);
+        flux['Net']['Pump']['K'].push(beta/gamma*na);
+        flux['Net']['Channel']['K'].push(pk*u*(k*Math.exp(u)-k0)/g);
+        flux['Net']['NC']['K'].push(0);
+        flux['Net']['KC']['K'].push(jkc);
+        flux['Net']['NKCC']['K'].push(jnkcc);
+        flux['Net']['Pump']['Cl'].push(0);
+        flux['Net']['Channel']['Cl'].push(pcl*u*(cl-cl0*Math.exp(u))/g);
+        flux['Net']['NC']['Cl'].push(jnc);
+        flux['Net']['KC']['Cl'].push(jkc);
+        flux['Net']['NKCC']['Cl'].push(2*jnkcc);
+        flux['In']['Pump']['Na'].push(0);
+        flux['In']['Channel']['Na'].push(-pna*u*na0/g);
+        flux['In']['NC']['Na'].push(inc*na0*cl0);
+        flux['In']['KC']['Na'].push(0);
+        flux['In']['NKCC']['Na'].push(inkcc*na0*k0*cl0*cl0);
+        flux['In']['Pump']['K'].push(beta/gamma*na);
+        flux['In']['Channel']['K'].push(pk*u*(-k0)/g);
+        flux['In']['NC']['K'].push(0);
+        flux['In']['KC']['K'].push(ikc*k0*cl0);
+        flux['In']['NKCC']['K'].push(inkcc*na0*k0*cl0*cl0);
+        flux['In']['Pump']['Cl'].push(0);
+        flux['In']['Channel']['Cl'].push(pcl*u*(-cl0*Math.exp(u))/g);
+        flux['In']['NC']['Cl'].push(inc*na0*cl0);
+        flux['In']['KC']['Cl'].push(ikc*k0*cl0);
+        flux['In']['NKCC']['Cl'].push(2*inkcc*na0*k0*cl0*cl0);
+        flux['Ef']['Pump']['Na'].push(-beta*na);
+        flux['Ef']['Channel']['Na'].push(pna*u*na*Math.exp(u)/g);
+        flux['Ef']['NC']['Na'].push(jnce);
+        flux['Ef']['KC']['Na'].push(0);
+        flux['Ef']['NKCC']['Na'].push(jnkcce);
+        flux['Ef']['Pump']['K'].push(0);
+        flux['Ef']['Channel']['K'].push(pk*u*k*Math.exp(u)/g);
+        flux['Ef']['NC']['K'].push(0);
+        flux['Ef']['KC']['K'].push(jkce);
+        flux['Ef']['NKCC']['K'].push(jnkcce);
+        flux['Ef']['Pump']['Cl'].push(0);
+        flux['Ef']['Channel']['Cl'].push(pcl*u*cl/g);
+        flux['Ef']['NC']['Cl'].push(jnce);
+        flux['Ef']['KC']['Cl'].push(jkce);
+        flux['Ef']['NKCC']['Cl'].push(2*jnkcce);
     }
 
-    function calc() {
-        u = solveU(na, k, cl, na0, k0, cl0, pna, pk, pcl, beta, gamma);
+    function DIAPBEZL() {
+        let unach1 = unach;
+        let ukon1 = ukon;
+        let deltau = 0.013;
+        let uu = unach1;
+        let ff1 = 0.1;
+        let ff2 = 0.1;
+        do {
+            let ch1 = (pcl*cl+pk*k0+pna*na0+beta*na*(1-1/gamma)/uu);
+            let zn1 = (pcl*cl0+pk*k+pna*na+beta*na*(1-1/gamma)/uu);
+            ff1 = zn1*Math.exp(uu)-ch1;
+            uu += deltau;
+            ch1 = (pcl*cl+pk*k0+pna*na0+beta*na*(1-1/gamma)/uu);
+            zn1 = (pcl*cl0+pk*k+pna*na+beta*na*(1-1/gamma)/uu);
+            ff2 = zn1*Math.exp(uu)-ch1;
+            if (uu>=ukon1) {
+                console.error('RANGE NOT FOUND');
+                return [uu-deltau, uu];
+            }
+        } while (!((ff1*ff2<0) && (ff1!=0) && (ff2!=0)))
+		return [uu-deltau, uu];
+    }
+
+    function ZEROIN(ax, bx, tol, F) {
+		let eps = 1.0;
+		let fierstcall = true;
+		let a, b, c, d, e, fa, fb, fc, tol1, xm, p, q, r, s;
+		if (fierstcall) {
+			do {
+				eps = eps/2;
+				tol1 = 1+eps;
+			} while (tol1 <= 1)
+		}
+    }
+
+    function calculate() {
+        unach = -5.5;
+        ukon = 0.2;
+        error = 1e-10;
+        [unach, ukon] = DIAPBEZL();
+		console.log(unach, ukon);
+        //u = ZEROIN(unach, ukon, error);
+        u = solveU(na, k, cl, na0, k0, cl0, pna, pk, pcl, beta, gamma, unach, ukon);
         mt.push(t);
         mu.push(u*26.7);
         mna.push(na);
@@ -279,31 +300,34 @@ function main() {
         mcl.push(cl);
         mva.push(V);
         mz.push(z);
-        naC.push(na*V);
-        kC.push(k*V);
-        clC.push(cl*V);
+        naC.push(na*V*1000);
+        kC.push(k*V*1000);
+        clC.push(cl*V*1000);
         g = 1-Math.exp(u);
-        osor = (beta/gamma*na)/(ikc*k0*cl0+inkcc*na0*k0*cl0*cl0-pk*u*k0/g );
+        osor = (beta/gamma*na)/(ikc*k0*cl0+inkcc*na0*k0*cl0*cl0-pk*u*k0/g);
         mosor.push(osor);
         calc_fluxes();
+
         if (na!=0)
             mun.push(26.7*(u-Math.log(na0/na)));
-        else 
+        else
             mun.push(0);
         if (k!=0)
             muk.push(26.7*(u-Math.log(k0/k)));
-            else 
-                muk.push(0);
+        else 
+            muk.push(0);
         if (cl!=0)
             mucl.push(26.7*(-u-Math.log(cl0/cl)));
-            else 
-                mucl.push(0);
+        else 
+            mucl.push(0);
 
-        var i=0;
+        var i=1;
         do {
-            // solve eq for u    vichu in pascal
-            u = solveU(na, k, cl, na0, k0, cl0, pna, pk, pcl, beta, gamma);
-            // find devariatives for Na, K, Cl   PROIZBEZ in pascal
+			unach = -5.5;
+			ukon = 0.2;
+			[unach, ukon] = DIAPBEZL();
+			console.log(unach, ukon);
+            u = solveU(na, k, cl, na0, k0, cl0, pna, pk, pcl, beta, gamma, unach, ukon);
             g = 1-Math.exp(u);
             if ((cl0!=0) && (k0!=0) && (na0!=0)) {
                 var jnc = inc*(na0*cl0-na*cl);
@@ -334,8 +358,6 @@ function main() {
             osor = (beta/gamma*na)/(ikc*k0*cl0+inkcc*na0*k0*cl0*cl0-pk*u*k0/g );
             t = t+h;
             beta = beta-kb*h;
-            
-
             if (i%hp==0) {
                 mt.push(t);
                 mu.push(u*26.7);
@@ -344,9 +366,9 @@ function main() {
                 mcl.push(cl);
                 mva.push(V);
                 mz.push(z);
-                naC.push(na*V);
-                kC.push(k*V);
-                clC.push(cl*V);
+                naC.push(na*V*1000);
+                kC.push(k*V*1000);
+                clC.push(cl*V*1000);
                 mosor.push(osor);
                 mun.push(26.7*(u-Math.log(na0/na)));
                 muk.push(26.7*(u-Math.log(k0/k)));
@@ -678,169 +700,10 @@ function main() {
         });
     }
 
-
-
-    calc()
-    
-
     form_submit.onclick = function (e) {
         e.preventDefault();
-        t_max = 300;
-        hp = 1;
-        mt = [];
-        mu = [];
-        mk = [];
-        mna = [];
-        mcl = [];
-        ml = [];
-        mva = [];
-        mz = [];
-        naC = [];
-        kC = [];
-        clC = [];
-        mosor = [];
-        mun = [];
-        muk = [];
-        mucl = [];
-        flux = {
-          'Net' : {
-            'Pump': {
-              'Na': [],
-              'K' : [],
-              'Cl': [],
-            },
-            'Channel': {
-              'Na': [],
-              'K' : [],
-              'Cl': [],
-            },
-            'NC' : {
-              'Na': [],
-              'K' : [],
-              'Cl': [],
-            },
-            'KC' : {
-              'Na': [],
-              'K' : [],
-              'Cl': [],
-            },
-            'NKCC' : {
-              'Na': [],
-              'K' : [],
-              'Cl': [],
-            },
-          }, 
-          'In' : {
-            'Pump': {
-              'Na': [],
-              'K' : [],
-              'Cl': [],
-            },
-            'Channel': {
-              'Na': [],
-              'K' : [],
-              'Cl': [],
-            },
-            'NC' : {
-              'Na': [],
-              'K' : [],
-              'Cl': [],
-            },
-            'KC' : {
-              'Na': [],
-              'K' : [],
-              'Cl': [],
-            },
-            'NKCC' : {
-              'Na': [],
-              'K' : [],
-              'Cl': [],
-            },
-          },
-          'Ef' : {
-            'Pump': {
-              'Na': [],
-              'K' : [],
-              'Cl': [],
-            },
-            'Channel': {
-              'Na': [],
-              'K' : [],
-              'Cl': [],
-            },
-            'NC' : {
-              'Na': [],
-              'K' : [],
-              'Cl': [],
-            },
-            'KC' : {
-              'Na': [],
-              'K' : [],
-              'Cl': [],
-            },
-            'NKCC' : {
-              'Na': [],
-              'K' : [],
-              'Cl': [],
-            },
-          }
-        };
-        calc_fluxes();
-
-        // READING DATA
-        na0 = parseFloat(input_na0.value);
-        k0 = parseFloat(input_k0.value);
-        cl0 = parseFloat(input_cl0.value);
-        B0 = parseFloat(input_b0.value);
-        kv = parseFloat(input_kv.value);
-        na1 = parseFloat(input_na.value);
-        k1 = parseFloat(input_k.value);
-        cl1 = parseFloat(input_cl.value);
-        beta = parseFloat(input_beta.value);
-        gamma = parseFloat(input_gamma.value);
-        pna = parseFloat(input_pna.value);
-        pk = parseFloat(input_pk.value);
-        pcl = parseFloat(input_pcl.value);
-        inc = parseFloat(input_inc.value);
-        ikc = parseFloat(input_ikc.value);
-        inkcc = parseFloat(input_inkcc.value);
-        t_max = parseFloat(input_tmax.value);
-        if (!(isNumber(na0) && isNumber(k0) && isNumber(cl0) && isNumber(B0) && isNumber(kv) && isNumber(na1) && isNumber(k1) && isNumber(cl1) && isNumber(beta) && isNumber(gamma) && isNumber(pna) && isNumber(pk) && isNumber(pcl) && isNumber(inc) && isNumber(ikc) && isNumber(inkcc) && isNumber(t_max))) {
-          warning_div.style.display = 'inline-block';
-          throw 'BAD DATA'
-        }
-        hp = 1;
-        kb = 0;
-
-        na = na1;
-        k = k1;
-        cl = cl1;
-        BB = B0;
-        A1 = 1;
-        na = na*kv;
-        k = k*kv;
-        cl = cl*kv;
-        mast = (k0+na0+cl0+BB-k-na-cl);
-        V = A1/mast;
-        z = V*(cl-na-k)/A1;
-        na2 = na;
-        k2 = k;
-        cl2 = cl;
-        beta2 = beta;
-        V2 = V;
-        h = 0.1;
-        t = 0;
-        lt =  1;
-        
-        naC = [na*V];
-        kC = [k*V];
-        clC = [cl*V];
-
-        if ((na2<=0) || (k2<=0) || (cl2<=0) || (V2<=0) || (V<=0) || (z>=0)) {
-          throw 'BAD INITIAL DATA';
-        }
-
-        calc();
+        init();
+        calculate();
     }
 
     function download(filename, text) {
@@ -854,29 +717,29 @@ function main() {
         element.click();
       
         document.body.removeChild(element);
-      }
+    }
 
     download_result.onclick = function(e) {
         var data = {
-            't': mt,
-            'U': mu,
-            'na': mna,
-            'k': mk,
-            'cl': mcl,
-            'V/A': mva,
-            'mun': mun,
-            'muk': muk,
-            'mucl': mucl,
-            'naC': naC,
-            'kC': kC,
-            'clC': clC,
-            'z': mz,
-            'OSOR': mosor, 
+            't': mt.map((value)=>value.toFixed(1)),
+            'U': mu.map((value)=>value.toFixed(1)),
+            'na': mna.map((value)=>value.toFixed(1)),
+            'k': mk.map((value)=>value.toFixed(1)),
+            'cl': mcl.map((value)=>value.toFixed(1)),
+            'V/A': mva.map((value)=>value.toFixed(2)),
+            'mun': mun.map((value)=>value.toFixed(1)),
+            'muk': muk.map((value)=>value.toFixed(1)),
+            'mucl': mucl.map((value)=>value.toFixed(1)),
+            'naC': naC.map((value)=>value.toFixed(1)),
+            'kC': kC.map((value)=>value.toFixed(1)),
+            'clC': clC.map((value)=>value.toFixed(1)),
+            'z': mz.map((value)=>value.toFixed(2)),
+            'OSOR': mosor.map((value)=>value.toFixed(2)), 
         };
         for (const fluxtype of Object.keys(flux)) {
           for (const transfertype of Object.keys(flux[fluxtype])) {
             for (const atomtype of Object.keys(flux[fluxtype][transfertype])) {
-              data[`${fluxtype}flux_${transfertype}_${atomtype}`] = flux[fluxtype][transfertype][atomtype];
+              data[`${fluxtype}flux_${transfertype}_${atomtype}`] = flux[fluxtype][transfertype][atomtype].map((value)=>value.toFixed(4));
             }
           }
         }
@@ -895,7 +758,14 @@ function main() {
         var jnce=inc*(-na*cl);
         var jkce=ikc*(-k*cl);
         var jnkcce=inkcc*(-na*k*cl*cl);
-        result_text += `* na0 k0 cl0 B0 kv na k cl beta gamma\n* ${na0} ${k0} ${cl0} ${B0} ${kv} ${na1} ${k1} ${cl1} ${beta} ${gamma}\n* pna pk pcl inc ikc inkcc hp kb\n* ${pna} ${pk} ${pcl} ${inc} ${ikc} ${inkcc} ${hp} ${kb}\n\n* Net_flux PUMP Channel NC KC NKCC\n* Na ${-beta*na} ${pna*u*(na*Math.exp(u)-na0)/g} ${jnc} ${0} ${jnkcc}\n* K ${beta/gamma*na} ${pk*u*(k*Math.exp(u)-k0)/g} ${0} ${jkc} ${jnkcc}\n* Cl ${0} ${pcl*u*(cl-cl0*Math.exp(u))/g} ${jnc} ${jkc} ${2*jnkcc}\n* Influx PUMP IChannel INC IKC INKCC\n* Na ${0} ${-pna*u*na0/g} ${inc*na0*cl0} ${0} ${inkcc*na0*k0*cl0*cl0}\n* K ${beta/gamma*na} ${pk*u*(-k0)/g} ${0} ${ikc*k0*cl0} ${inkcc*na0*k0*cl0*cl0}\n* Cl ${0} ${pcl*u*(-cl0*Math.exp(u))/g} ${inc*na0*cl0} ${ikc*k0*cl0} ${2*inkcc*na0*k0*cl0*cl0}\n* Efflux PUMP EChannel ENC EKC ENKCC\n* Na ${-beta*na} ${pna*u*na*Math.exp(u)/g} ${jnce} ${0} ${jnkcce}\n* K ${0} ${pk*u*k*Math.exp(u)/g} ${0} ${jkce} ${jnkcce}\n* Cl ${0} ${pcl*u*cl/g} ${jnce} ${jkce} ${2*jnkcce}\n\n* z OSOR (A/V)*1000\n* ${z} ${(beta/gamma*na)/(ikc*k0*cl0+inkcc*na0*k0*cl0*cl0-pk*u*k0/g )} ${(k0+na0+cl0+BB-k-na-cl)*1000}`
+        result_text += `\n* na0 k0 cl0 B0 kv na k cl beta gamma\n* ${na0} ${k0} ${cl0} ${B0} ${kv} ${na1} ${k1} ${cl1} ${beta} ${gamma}\n* pna pk pcl inc ikc inkcc hp kb\n* ${pna} ${pk} ${pcl} ${inc} ${ikc} ${inkcc} ${hp} ${kb}\n\n* Net_flux PUMP Channel NC KC NKCC\n* Na ${(-beta*na).toFixed(4)} ${(pna*u*(na*Math.exp(u)-na0)/g).toFixed(4)} ${(jnc).toFixed(4)} ${0} ${(jnkcc.toFixed(4))}\n* K ${(beta/gamma*na).toFixed(4)} ${(pk*u*(k*Math.exp(u)-k0)/g).toFixed(4)} ${0} ${jkc.toFixed(4)} ${jnkcc.toFixed(4)}\n* Cl ${0} ${(pcl*u*(cl-cl0*Math.exp(u))/g).toFixed(4)} ${jnc.toFixed(4)} ${jkc.toFixed(4)} ${(2*jnkcc).toFixed(4)}\n* Influx PUMP IChannel INC IKC INKCC\n* Na ${0} ${(-pna*u*na0/g).toFixed(4)} ${(inc*na0*cl0).toFixed(4)} ${0} ${(inkcc*na0*k0*cl0*cl0).toFixed(4)}\n* K ${(beta/gamma*na).toFixed(4)} ${(pk*u*(-k0)/g).toFixed(4)} ${0} ${(ikc*k0*cl0).toFixed(4)} ${(inkcc*na0*k0*cl0*cl0).toFixed(4)}\n* Cl ${0} ${(pcl*u*(-cl0*Math.exp(u))/g).toFixed(4)} ${(inc*na0*cl0).toFixed(4)} ${(ikc*k0*cl0).toFixed(4)} ${(2*inkcc*na0*k0*cl0*cl0).toFixed(4)}\n* Efflux PUMP EChannel ENC EKC ENKCC\n* Na ${(-beta*na).toFixed(4)} ${(pna*u*na*Math.exp(u)/g).toFixed(4)} ${jnce.toFixed(4)} ${0} ${jnkcce.toFixed(4)}\n* K ${0} ${(pk*u*k*Math.exp(u)/g).toFixed(4)} ${0} ${jkce.toFixed(4)} ${jnkcce.toFixed(4)}\n* Cl ${0} ${(pcl*u*cl/g).toFixed(4)} ${jnce.toFixed(4)} ${jkce.toFixed(4)} ${(2*jnkcce).toFixed(4)}\n\n* z OSOR (A/V)*1000\n* ${z.toFixed(2)} ${((beta/gamma*na)/(ikc*k0*cl0+inkcc*na0*k0*cl0*cl0-pk*u*k0/g )).toFixed(2)} ${((k0+na0+cl0+BB-k-na-cl)).toFixed(2)}`
         download('result.txt', result_text);
     }
+
+
+
+    init();
+    calculate();
+
+
 }
