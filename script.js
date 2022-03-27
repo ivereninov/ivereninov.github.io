@@ -726,7 +726,7 @@ function main() {
             'na': mna.map((value)=>value.toFixed(1)),
             'k': mk.map((value)=>value.toFixed(1)),
             'cl': mcl.map((value)=>value.toFixed(1)),
-            'V/A': mva.map((value)=>value.toFixed(2)),
+            'V/A': mva.map((value)=>value.toFixed(5)),
             'mun': mun.map((value)=>value.toFixed(1)),
             'muk': muk.map((value)=>value.toFixed(1)),
             'mucl': mucl.map((value)=>value.toFixed(1)),
