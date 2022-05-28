@@ -7,5 +7,5 @@ description: > # this means to ignore newlines until "show_excerpts:"
   Their operation is described by a set of nonlinear and transcendental equations that cannot be solved analytically.
   
 header_pages:
- - cellflux.html
+ - cellionfluxes.html
 
