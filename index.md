@@ -8,11 +8,7 @@ of monovalent ions through the membrane (pump, channels, cotransporters).
  The physical and mathematical foundations for calculating flux balance equations, as well as the notation of variables and
 parameters, and the use of the program for analyzing real experimental data are described in open
 publications (Vereninov et al., 2014, 2016; Yurinskaya et al., 2019, 2020; Yurinskaya, Vereninov,
-2021, 2022). The minimum set of "input" experimental data allows to find the characteristic
-parameters of the cell's electrochemical system for further calculation of unidirectional fluxes of all
-monovalent ions along each of the ion pathways, electrochemical gradients of all ions on the cell
-membrane under the balanced state and during transient processes caused by a change in the
-composition of the medium or characteristic parameters.
+2021, 2022). 
 
  The minimum set of "input" experimental data is necessary to find the characteristic parameters of the
 cell's electrochemical system for further calculation of unidirectional fluxes of all monovalent ions along
@@ -20,22 +16,9 @@ each of the ion pathways, electrochemical gradients of all ions on the cell memb
 balanced state and during transient processes caused by a change in the composition of the medium or
 characteristic parameters
 
- The program is aimed for calculation of the monovalent ion gradients on plasma membrane of animal
-cells which play a clue role in intra- and inter-cellular signaling, transport of substances across
-membrane and cell water balance. The presence of negatively charged intracellular polyelectrolytes and
-a complex of all types of ion transfer through membrane are considered as a basis for calculation of the
-cell electrochemical system as a whole. 
- The physical and mathematical background of the computation
-program as well as designations of variables and parameters and a using the program for analysis of a
-real experimental data are described in open publications. A minimal set of an “input”
-experimental data is required to find the characteristic parameters which allows further to calculate all
-unidirectional fluxes via all ion pathways, electrochemical gradient of all monovalent ions on the cell
-membrane and dynamics of the transition processes caused by changes in composition of medium or in
-characteristic parameters.
-
 ## How to use
 
-For computation go here -> [CELL-FLUX COMPUTATION](https://vereninov.com/cellflux)
+For computation go here -> [CELL-FLUX COMPUTATION](https://vereninov.com/cellionfluxes)
 
 ## Publications
 
