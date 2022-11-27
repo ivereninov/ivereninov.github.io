@@ -597,7 +597,7 @@ function main() {
                 x: mt,
                 y: mun,
                 mode: 'lines',
-                name: 'Una',
+                name: 'mun',
                 line: {
                     color: 'red',
                     width: 2,
@@ -607,7 +607,7 @@ function main() {
                 x: mt,
                 y: muk,
                 mode: 'lines',
-                name: 'Uk',
+                name: 'muk',
                 line: {
                     color: 'blue',
                     width: 2,
@@ -617,7 +617,7 @@ function main() {
                 x: mt,
                 y: mucl,
                 mode: 'lines',
-                name: 'Ucl',
+                name: 'mucl',
                 line: {
                     color: 'green',
                     width: 2,
